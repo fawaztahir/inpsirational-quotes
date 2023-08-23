@@ -1,4 +1,5 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
+import tailwindcss from "~/tailwind.css";
 
 import {
   Links,
@@ -11,6 +12,7 @@ import {
 
 export const links = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+  ...(tailwindcss ? [{ rel: "stylesheet", href: tailwindcss }] : []),
 ];
 
 export default function App() {
@@ -22,7 +24,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="bg-violet-900 text-white">
         <Outlet />
         <ScrollRestoration />
         <Scripts />

@@ -1,4 +1,3 @@
-import { cssBundleHref } from "@remix-run/css-bundle";
 import tailwindcss from "~/tailwind.css";
 
 import {
@@ -7,11 +6,16 @@ import {
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration,
 } from "@remix-run/react";
 
+export const meta = () => {
+    return [
+        { title: "Inspire yourself with uplifting quotes" },
+        { name: "description", content: "Welcome to Remix!" },
+    ];
+};
+
 export const links = () => [
-  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
   ...(tailwindcss ? [{ rel: "stylesheet", href: tailwindcss }] : []),
 ];
 
@@ -24,9 +28,8 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-violet-900 text-white">
+      <body className="bg-black text-white overflow-hidden">
         <Outlet />
-        <ScrollRestoration />
         <Scripts />
         <LiveReload />
       </body>

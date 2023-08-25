@@ -2,9 +2,17 @@ import { json } from "@remix-run/node";
 import { useLoaderData, useNavigation, Form } from "@remix-run/react";
 
 const requestQuote = async () => {
-    const response = await fetch('https://zenquotes.io/api/random');
+    const response = await fetch('https://api.api-ninjas.com/v1/quotes', {
+        headers: {
+            'X-Api-Key': '70fGf/oMLYWBq+Na9Z9Bhg==k7zXvnWRrBSMDKW6'
+        }
+    });
     const data = await response.json();
-    return data;
+    const [quote] = data;
+    return [{
+        q: quote.quote,
+        a: quote.author
+    }];
 }
 
 export const loader = async () => {
@@ -45,7 +53,7 @@ export default function Index() {
                         <p>{quote?.q}</p>
                     </blockquote>
                     <figcaption className="flex items-center justify-center mt-6 space-x-3">
-                        <div class="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
+                        <div className="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
                             <cite className="font-medium text-gray-900 dark:text-white pr-3"> &mdash; {quote?.a}</cite>
                             <div className="flex items-center">
                                 <button onClick={shareOnTwitter} title="Share on Twitter" className="p-3 mx-3 inline-block rounded-full" disabled={isSubmitting} style={{'background-color': '#1da1f2'}}>
